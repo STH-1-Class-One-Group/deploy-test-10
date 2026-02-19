@@ -1,41 +1,50 @@
-let currentStep = 1;
+const content = {
+    1: "안녕!",
+    2: "설 잘 보냈니?",
+    3: "내가 설날에 맛있게 먹은 음식을 알려줄게",
+    4: "그 음식은 바로 떡국! (그릇 등장)",
+    5: "쫄깃한 떡을 먼저 담고..",
+    6: "따뜻한 육수를 부어줘.",
+    7: "정성스러운 고명까지 올리면!",
+    8: "올해 건강을 기원하는 떡국 완성!"
+};
 
-function nextStep() {
-    currentStep++;
-    updateUI();
-}
+let step = 1;
 
-function updateUI() {
-    // 1. 멘트 변경
-    document.querySelectorAll('.msg').forEach(m => m.classList.remove('active'));
-    document.getElementById(`msg-${currentStep}`)?.classList.add('active');
+function handleNext() {
+    if (step >= 8) return;
+    step++;
+    
+    // 멘트 변경
+    document.getElementById('main-text').innerText = content[step];
 
-    // 2. 단계별 재료 등장 로직
-    if (currentStep === 4) { // page4: 그릇 등장
-        document.querySelector('.bowl').classList.add('active');
-    }
-    if (currentStep === 5) { // page5: 떡 등장
-        document.querySelectorAll('.tteok').forEach(t => t.classList.add('active'));
-    }
-    if (currentStep === 6) { // page6: 국물(육수) 등장
-        document.querySelector('.soup').classList.add('active');
-    }
-    if (currentStep === 7) { // page7: 고명 등장
-        document.querySelector('.garnish-group').classList.add('active');
-    }
-    if (currentStep === 8) { // page8: 버튼 교체
+    // 단계별 재료 순서 (Page 번호 기준)
+    if (step === 4) document.querySelector('.bowl').classList.add('active');
+    if (step === 5) document.querySelector('.tteok-group').classList.add('active');
+    if (step === 6) document.querySelector('.soup').classList.add('active');
+    if (step === 7) document.querySelector('.garnish-group').classList.add('active');
+    
+    if (step === 8) {
         document.getElementById('next-btn').classList.add('hidden');
         document.getElementById('popup-btns').classList.remove('hidden');
+        document.getElementById('popup-btns').classList.add('active');
     }
 }
 
-// 팝업 로직
 function openPopup(type) {
     const overlay = document.getElementById('popup-overlay');
-    overlay.classList.remove('hidden');
-    // type에 따라 제목과 설명 텍스트 교체 (데이터 모듈화)
+    const title = document.getElementById('popup-title');
+    overlay.style.display = 'flex';
+    
+    if (type === 'recipe') {
+        title.innerText = "떡국 레시피";
+        // 레시피 내용 추가
+    } else {
+        title.innerText = "만두 꿀팁";
+        // 팁 내용 추가
+    }
 }
 
 function closePopup() {
-    document.getElementById('popup-overlay').classList.add('hidden');
+    document.getElementById('popup-overlay').style.display = 'none';
 }

@@ -2,47 +2,51 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>냠냠</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>설날 떡국 이야기</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app" class="step-1">
+    <div id="app">
         <div class="message-container">
-            <div class="msg" id="msg-1">안녕! 설 잘 보냈니?</div>
-            <div class="msg" id="msg-2">내가 설날에 맛있게 먹은 음식을 알려줄게</div>
-            <div class="msg" id="msg-3">그 음식은 바로 떡국! 같이 만들어 볼래?</div>
-            </div>
+            <h1 id="main-text" class="active">안녕!</h1>
+        </div>
 
-        <div class="food-stage">
-            <div class="bowl">
-                <div class="soup"></div>
-                <div class="tteok-group">
-                    <div class="tteok t1"></div><div class="tteok t2"></div>
-                </div>
-                <div class="garnish-group">
-                    <div class="egg"></div>
-                    <div class="meat"></div>
+        <div class="stage">
+            <div class="bowl-wrapper">
+                <div class="bowl">
+                    <div class="soup"></div>
+                    <div class="tteok-group">
+                        <div class="tteok t1"></div>
+                        <div class="tteok t2"></div>
+                        <div class="tteok t3"></div>
+                    </div>
+                    <div class="garnish-group">
+                        <div class="egg"></div>
+                        <div class="meat"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="button-container">
-            <button id="next-btn" onclick="nextStep()">다음 단계</button>
+        <div class="controls">
+            <button id="next-btn" onclick="handleNext()">다음 단계</button>
             <div id="popup-btns" class="hidden">
-                <button onclick="openPopup('recipe')">떡국 레시피</button>
-                <button onclick="openPopup('tip')">만두 꿀팁</button>
+                <button class="choice-btn" onclick="openPopup('recipe')">떡국 레시피</button>
+                <button class="choice-btn" onclick="openPopup('tip')">만두 꿀팁</button>
             </div>
         </div>
 
         <div id="popup-overlay" class="hidden">
             <div class="popup-content">
                 <div class="popup-grid">
-                    <div class="popup-food-view">
+                    <div class="popup-left">
+                        <div class="bowl mini">...</div> 
                         <button class="back-btn" onclick="closePopup()">뒤로가기</button>
                     </div>
-                    <div class="popup-desc">
-                        <h2 id="popup-title">설명 제목</h2>
-                        <p id="popup-text">상세 내용이 들어갑니다.</p>
+                    <div class="popup-right">
+                        <h2 id="popup-title">제목</h2>
+                        <div id="popup-desc">내용</div>
                     </div>
                 </div>
             </div>

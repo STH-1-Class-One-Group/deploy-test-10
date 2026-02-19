@@ -1,51 +1,32 @@
-/* 기본 레이아웃 */
-.msg, .tteok, .soup, .garnish-group {
+:root { --slow: 1.5s; --fade: 1.2s; }
+
+body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; background: #fdfcf0; font-family: 'sans-serif'; }
+
+/* 초기 상태: 투명하고 살짝 아래 배치 */
+.bowl, .soup, .tteok-group, .garnish-group, .hidden {
     opacity: 0;
-    transition: opacity 1.2s ease-in-out, transform 1.2s ease-out;
-    transform: translateY(10px);
+    transform: translateY(30px);
+    transition: opacity var(--slow) ease, transform var(--fade) ease;
 }
 
-/* 활성화 상태 (JS에서 추가됨) */
+/* 활성화 상태 */
 .active {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
 
 /* CSS로 그릇 그리기 */
-.bowl {
-    width: 200px;
-    height: 100px;
-    background: #f0f0f0;
-    border-bottom-left-radius: 100px;
-    border-bottom-right-radius: 100px;
-    border: 4px solid #333;
-    position: relative;
-    margin: 0 auto;
-}
+.bowl { width: 300px; height: 150px; background: white; border: 5px solid #333; border-radius: 0 0 150px 150px; position: relative; margin: 0 auto; }
 
-/* 국물 선 */
-.soup {
-    position: absolute;
-    bottom: 10px;
-    width: 180px;
-    height: 2px;
-    background: #f4e1a1;
-    left: 10px;
-}
+/* 국물 (선으로 표현) */
+.soup { position: absolute; top: 40px; left: 10%; width: 80%; height: 5px; background: #f1e4bc; border-radius: 5px; }
 
-/* 떡 모양 */
-.tteok {
-    width: 40px;
-    height: 20px;
-    background: white;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    position: absolute;
-}
+/* 떡 (타원형) */
+.tteok { position: absolute; width: 60px; height: 30px; background: #fff; border: 2px solid #eee; border-radius: 50%; }
+.t1 { top: 60px; left: 40px; transform: rotate(-10deg); }
+.t2 { top: 70px; left: 120px; transform: rotate(15deg); }
+.t3 { top: 65px; left: 200px; }
 
-/* 팝업 그리드 설정 */
-.popup-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 음식 뷰 | 설명창 */
-    gap: 20px;
-}
+/* 팝업 그리드 */
+.popup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 40px; }
+.hidden { display: none; }
